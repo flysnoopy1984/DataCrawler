@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.1" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataCrawler.Core\DataCrawler.Core.csproj" />
+    <ProjectReference Include="..\DataCrawler.Repository\DataCrawler.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

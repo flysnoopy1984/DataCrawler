@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/DataCrawler
+/DataCrawler/bin/Debug
+/DataCrawler/obj
+/DataCrawler.API/obj
+/DataCrawler.API/bin/Debug/netcoreapp3.1
+/DataCrawler.Tasks/obj
+/DataCrawler.Tasks/bin/Debug/netcoreapp3.1
