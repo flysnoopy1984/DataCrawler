@@ -4,7 +4,11 @@ using System.Text;
 
 namespace DataCrawler.Util
 {
-    class ExceptionMessage
+    public class ExceptionProxyConnect:Exception
     {
+        public ExceptionProxyConnect(string msg) : base(msg)
+        {
+            ProxyManager.RemoveProxyHostCache();
+        }
     }
 }

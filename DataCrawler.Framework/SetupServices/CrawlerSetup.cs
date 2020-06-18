@@ -14,11 +14,11 @@ namespace DataCrawler.Framework.SetupServices
         public static void AddCrawlers(this IServiceCollection services, IConfiguration configuration)
         {
             //    var type = System.Reflection.Assembly
-            services.AddScoped<ICrawlerBatchBook,BookLatestCrawler>();
-            services.AddScoped<ICrawlerBatchBook,BookPopularCrawler>();
-            services.AddScoped<ICrawlerBook, BookDetailCrawler>();
-            services.AddScoped<ICrawlerTag, BookTagsCrawler>();
-            services.AddScoped<ICrawlerBatchBook, TagListCrawler>();
+            services.AddTransient<ICrawlerBatchBook,BookLatestCrawler>();
+            services.AddTransient<ICrawlerBatchBook,BookPopularCrawler>();
+            services.AddTransient<ICrawlerBook, BookDetailCrawler>();
+            services.AddTransient<ICrawlerTag, BookTagsCrawler>();
+            services.AddTransient<ICrawlerBatchBook, TagListCrawler>();
             //services.AddTransient(fac =>
             //{
             //    Func<string, ICrawlerData> accesor = key =>

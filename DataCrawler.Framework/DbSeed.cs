@@ -11,9 +11,9 @@ namespace DataCrawler.Framework
     public class DbSeed
     {
 
-        public static void InitData(DouBanBookService db)
+        public static void InitData(DouBanBookService db,bool needsection=false)
         {
-             db.InitData();
+             db.InitData(needsection);
         }
         public static void InitTables(ISqlSugarClient db)
         {
@@ -24,11 +24,13 @@ namespace DataCrawler.Framework
                         typeof(EBookSeries),
                         typeof(EBookTag),
                         typeof(ESeriesInfo),
-                       
+                        typeof(ESectionTag),
+
                         typeof(EDataSection),
                         typeof(EPerson),
                         typeof(ESection),
                         typeof(ETag),
+                       
 
                         typeof(EPlan_FromDouBanTagUrls),
                        

@@ -22,8 +22,15 @@ namespace DataCrawler.Repository
         {
             var rAll = await base.Db.Ado.UseTranAsync(() =>
             {
-                base.DelAll(a => a.SectionCode == newList[0].SectionCode);
-                base.AddRange(newList);
+                foreach(var es in newList)
+                {
+                    int n = base.DelAll(a => a.SectionCode == es.SectionCode && a.ItemCode == es.ItemCode && a.CreateDateTime.AddDays(10) < DateTime.Today);
+                    if (n  > 0)
+                        base.Add(es);
+                }
+            //    base.AddRange(newList);
+
+                
             });
             if (!rAll.IsSuccess)
                 NLogUtil.ErrorTxt($"[CoverNewSectionCode]建立Book和 Section 关系:{rAll.ErrorMessage}");
@@ -38,6 +45,7 @@ namespace DataCrawler.Repository
                 BatchNo = GenCodeHelper.DataSection_BatchNo(secCode),
                 ItemCode = itemCode,
                 SectionCode = secCode,
+                CreateDateTime = DateTime.Now,
                 
             };
         }

@@ -49,6 +49,8 @@ namespace DataCrawler.Core.DouBan
             _bookDetailData.DouBanBookInfo.Code = GenCodeHelper.Book_Code(DouBanAbbr, _DouBanBookId); //$"{DouBanAbbr}_{_DouBanBookId}";
         }
 
+      
+
 
         public BookDetail_middle Crawler(string entryUrl = "")
         {
@@ -62,16 +64,21 @@ namespace DataCrawler.Core.DouBan
 
             var bi = _bookDetailData.DouBanBookInfo;
 
-            HtmlWeb htmlWeb = new HtmlWeb();
-            htmlWeb.OverrideEncoding = Encoding.UTF8;
-            HtmlAgilityPack.HtmlDocument htmlDoc = htmlWeb.Load(entryUrl);
+        
+            HtmlDocument htmlDoc = getDocbyEntryUrl(entryUrl);
+            VerifyHeader(htmlDoc);
+
             var bn = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='wrapper']/h1/span");
+            if (bn == null)
+                return null;
+               // throw new Exception("No Book Title");
             bi.Title = bn.InnerText;
             var node = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='mainpic']/a");
             bi.CoverUrl = node.Attributes["href"].Value;
 
             var info = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='info']");
             var infoAttrs = info.SelectNodes(".//span");
+            if (infoAttrs == null) return null;
             foreach(var span in infoAttrs)
             {
                 try
@@ -294,10 +301,16 @@ namespace DataCrawler.Core.DouBan
         /// <param name="doc"></param>
         public void AnalyScore(HtmlDocument doc)
         {
-            var score =  doc.DocumentNode.SelectSingleNode("//strong[@class='ll rating_num ']").InnerText.Trim();
-            if (string.IsNullOrEmpty(score))
-                score = "0";
-            _bookDetailData.DouBanBookInfo.Score = Convert.ToDouble(score);
+            var rate_num = doc.DocumentNode.SelectSingleNode("//strong[@class='ll rating_num ']");
+            if(rate_num!=null)
+            {
+                var score = rate_num.InnerText.Trim();
+
+                if (string.IsNullOrEmpty(score))
+                    score = "0";
+                _bookDetailData.DouBanBookInfo.Score = Convert.ToDouble(score);
+            }
+           
 
         }
 

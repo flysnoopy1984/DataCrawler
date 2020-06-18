@@ -23,8 +23,8 @@ namespace DataCrawler.Core.DouBan
             foreach (var bookUrl in urlList)
             {
                var bd = ToDetail(bookUrl.DetailUrl, _CrawlerBook);
-               
-                result.Add(bd);
+               if(bd!=null)
+                    result.Add(bd);
             }
             NLogUtil.InfoTxt($"[结束]抓爬TagList{entryUrl}");
 
@@ -33,9 +33,10 @@ namespace DataCrawler.Core.DouBan
 
         public List<BookBatch> CrawlerUrls(string entryUrl)
         {
-            if (string.IsNullOrEmpty(entryUrl)) NLogUtil.ErrorTxt("TagListCrawler 没有入口Url"); 
-            List<BookBatch> result = new List<BookBatch>();
-           
+            if (string.IsNullOrEmpty(entryUrl)) 
+                NLogUtil.ErrorTxt("TagListCrawler 没有入口Url");
+            
+            List<BookBatch> result = new List<BookBatch>(); 
             var doc = getDocbyEntryUrl(entryUrl);
             var nodes = doc.DocumentNode.SelectNodes("//div[@class='article']//ul[@class='subject-list']/li");
             if(nodes !=null)

@@ -35,13 +35,14 @@ namespace DataCrawler.Tasks.DouBan
             if(taglist != null && taglist.Count>0)
             {
                var allList =  _DouBanBookRepository.InitPlanFromTagUrl(taglist);
-                foreach(var plan in allList)
+
+                try
                 {
-                    try
+                    foreach (var plan in allList)
                     {
-                        while(plan.ProcessPageIndex< CrawlerSetting.DB_MaxIndex_TagList)
+                        while (plan.ProcessPageIndex < CrawlerSetting.DB_MaxIndex_TagList)
                         {
-                            NLogUtil.InfoTxt($"豆瓣爬书计划-TagCode:{plan.Code},Index:{plan.ProcessPageIndex}");
+                            NLogUtil.InfoTxt($"豆瓣爬书计划-TagCode:{plan.TagCode},Index:{plan.ProcessPageIndex}");
                             var url = $"{DouBanBookBaseCrawlerData.DouBanBookPrefix}/tag/{plan.TagCode}?start={plan.ProcessPageIndex}&type=T";
                             List<BookDetail_middle> bnList = _TagListCrawler.Crawler(url);
                             HandleBookMiddleList(bnList);
@@ -49,15 +50,17 @@ namespace DataCrawler.Tasks.DouBan
                             plan.ProcessPageIndex += CrawlerSetting.DB_TagList_Step;
                             _DouBanBookRepository.UpdatePlan(plan);
                         }
-                     
-
-
                     }
-                    catch(Exception ex)
-                    {
-                        NLogUtil.ErrorTxt($"【错误】豆瓣爬书计划-TagList:{ex.Message}");
-                    }
-                 }
+                }
+                catch (ExceptionProxyConnect epc)
+                {
+                    throw epc;
+                }
+                catch (Exception ex)
+                {
+                    NLogUtil.ErrorTxt($"【错误】豆瓣爬书计划-TagList:{ex.Message}");
+                }
+                 
             } 
         }
 

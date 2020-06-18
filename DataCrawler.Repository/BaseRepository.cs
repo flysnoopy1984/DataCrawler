@@ -1,5 +1,6 @@
 ﻿
 using DataCrawler.Model;
+using DataCrawler.Util;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -172,10 +173,10 @@ namespace DataCrawler.Repository
 
         public  M AddOrUpdate_MasterData<M>(M saveObj) where M : BaseMasterData, new()
         {
-            
-            return  _db.Saveable<M>(saveObj)
-                .UpdateIgnoreColumns(o => new { o.CreateDateTime, o.DataSource })
-                .ExecuteReturnEntity();
+            return _db.Saveable<M>(saveObj)
+             .UpdateIgnoreColumns(o => new { o.CreateDateTime, o.DataSource })
+             .ExecuteReturnEntity();
+
         }
         public List<M> AddOrUpdate_MasterData<M>(List<M> saveList) where M : BaseMasterData, new()
         {

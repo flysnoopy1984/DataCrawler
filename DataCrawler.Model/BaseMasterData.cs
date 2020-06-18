@@ -25,5 +25,10 @@ namespace DataCrawler.Model
         public string UpdatedBy { get; set; }
 
         public DataSource DataSource { get; set; }
+
+        /// <summary>
+        /// 是否被（物理）删除
+        /// </summary>
+        public bool IsDelete { get; set; }
     }
 }

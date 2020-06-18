@@ -17,7 +17,11 @@ namespace DataCrawler.Core.DouBan
             try
             {
                 HtmlDocument doc = getDocbyEntryUrl(entryUrl);
+                VerifyHeader(doc);
+
                 var root = doc.DocumentNode.SelectNodes("//div[@class='article']/div")[1];
+                if (root == null)
+                    throw new ExceptionProxyConnect("getUrls Null");
                 var secNodes = root.SelectNodes(".//div");
                 foreach(var sec in secNodes)
                 {
@@ -35,6 +39,10 @@ namespace DataCrawler.Core.DouBan
                   
                 }
 
+            }
+            catch(ExceptionProxyConnect epc)
+            {
+                throw epc;
             }
             catch(Exception ex)
             {

@@ -76,10 +76,19 @@ namespace DataCrawler.Repository
 
 
 
-                        var rSection = _SectionDb.AddOrUpdate_MasterData<ESection>(middle.SectionList);
-                    var rBook = _BookDb.AddOrUpdate_MasterData<EBookInfo>(middle.DouBanBookInfo);
-
+                    var rSection = _SectionDb.AddOrUpdate_MasterData<ESection>(middle.SectionList);
                     try
+                    {
+                        var rBook = _BookDb.AddOrUpdate_MasterData<EBookInfo>(middle.DouBanBookInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        NLogUtil.ErrorTxt($"【错误】写入书本:{ex.Message}");
+                    }
+
+
+
+                     try
                     {
                         var rTag = _TagDb.AddOrUpdate_MasterData<ETag>(middle.tagList);
                     }
@@ -243,9 +252,10 @@ namespace DataCrawler.Repository
         }
 
 
-        public async void InitData()
+        public async void InitData(bool needsection = false)
         {
-            await _SectionDb.Init();
+            if(needsection)
+                await _SectionDb.Init();
         }
 
     }

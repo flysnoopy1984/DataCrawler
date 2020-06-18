@@ -37,15 +37,18 @@ namespace DataCrawler.Tasks.DouBan
               //  _DetailCrawler = new BookDetailCrawler();
 
                 var midData = _DetailCrawler.Crawler(url.DetailUrl);
+                if(midData!=null)
+                {
+                    // 添加虚拟非虚拟
+                    midData.DouBanBookInfo.FictionType = url.FictionType;
+                    //　添加到最新专栏
+                    var dataSection = _DouBanBookRepository.GetSection_NewExpress();
+                    secList.Add(DataSectionRepository.newModelInstance(dataSection.Code, midData.DouBanBookInfo.Code));
 
-                // 添加虚拟非虚拟
-                midData.DouBanBookInfo.FictionType = url.FictionType;                
-                //　添加到最新专栏
-                var dataSection = _DouBanBookRepository.GetSection_NewExpress();
-                secList.Add(DataSectionRepository.newModelInstance(dataSection.Code, midData.DouBanBookInfo.Code));
-          
-              
-                await _DouBanBookRepository.HandleBookMiddleAsync(midData);
+                    await _DouBanBookRepository.HandleBookMiddleAsync(midData);
+                }
+
+             
                 
             }
 

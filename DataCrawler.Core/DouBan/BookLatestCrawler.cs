@@ -31,8 +31,12 @@ namespace DataCrawler.Core.DouBan
             foreach(var bookUrl in urlList)
             {
                 var bd = ToDetail(bookUrl.DetailUrl, _CrawlerBook);
-                bd.DouBanBookInfo.FictionType = bookUrl.FictionType;
-                result.Add(bd);
+                if(bd != null)
+                {
+                    bd.DouBanBookInfo.FictionType = bookUrl.FictionType;
+                    result.Add(bd);
+                }
+              
             }
 
           
@@ -45,10 +49,8 @@ namespace DataCrawler.Core.DouBan
             if (string.IsNullOrEmpty(entryUrl)) entryUrl = DouBanLatestUrl;
 
             List<BookBatch> result = new List<BookBatch>();
-          
-            HtmlWeb htmlWeb = new HtmlWeb();
-            htmlWeb.OverrideEncoding = Encoding.UTF8;
-            HtmlAgilityPack.HtmlDocument htmlDoc = htmlWeb.Load(entryUrl);
+
+            HtmlAgilityPack.HtmlDocument htmlDoc = getDocbyEntryUrl(entryUrl);
             var fiction = htmlDoc.DocumentNode.SelectNodes("//div[@class='article']/ul/li");
 
             foreach (var item in fiction)

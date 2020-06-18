@@ -1,4 +1,5 @@
 ﻿using DataCrawler.Core;
+using DataCrawler.Model.MiddleObject;
 using DataCrawler.Repository;
 using DataCrawler.Util;
 using System;
@@ -22,8 +23,16 @@ namespace DataCrawler.Tasks.DouBan
         public async  void runAsync(string url)
         {
             NLogUtil.InfoTxt($"开始抓爬单本书:{url}");
-
-            var task_midData = await _DetailCrawler.CrawlerAsync(url);
+            BookDetail_middle task_midData = null;
+            try
+            {
+                task_midData = await _DetailCrawler.CrawlerAsync(url);
+            }
+            catch(ExceptionProxyConnect epc)
+            {
+                throw epc;
+            }
+           
 
             NLogUtil.InfoTxt($"抓爬结束");
         //    _DouBanBookRepository.Test(task_midData);

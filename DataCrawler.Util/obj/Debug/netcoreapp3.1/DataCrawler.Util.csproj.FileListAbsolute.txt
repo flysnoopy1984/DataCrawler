@@ -1,9 +1,9 @@
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\bin\Debug\netcoreapp3.1\DataCrawler.Util.deps.json
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\bin\Debug\netcoreapp3.1\DataCrawler.Util.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Util\bin\Debug\netcoreapp3.1\DataCrawler.Util.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.csproj.CoreCompileInputs.cache
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.AssemblyInfoInputs.cache
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.AssemblyInfo.cs
-D:\Project\SourceCode\DataCrawler\DataCrawler.Util\bin\Debug\netcoreapp3.1\DataCrawler.Util.pdb
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.dll
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.pdb
-D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.csproj.CoreCompileInputs.cache
 D:\Project\SourceCode\DataCrawler\DataCrawler.Util\obj\Debug\netcoreapp3.1\DataCrawler.Util.csprojAssemblyReference.cache

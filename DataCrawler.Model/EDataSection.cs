@@ -19,6 +19,8 @@ namespace DataCrawler.Model
         [SugarColumn(Length = 40)]
         public string BatchNo { get; set; }
 
+        public DateTime CreateDateTime { get; set; }
+
 
     }
 }
