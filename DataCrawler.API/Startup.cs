@@ -12,8 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using SqlSugar;
+
 
 namespace DataCrawler.API
 {
@@ -34,11 +33,38 @@ namespace DataCrawler.API
             services.AddSqlSugarSetup(Configuration);
             services.AddCrawlers(Configuration);
             services.AddRepository(Configuration);
-          //  services.AddScoped<DouBanBookRepository>();
+            //  services.AddScoped<DouBanBookRepository>();
+            #region  CROS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowedRequest", p =>
+                {
+                    var sec = new string[] { "apiConfig", "Cors", "IPs" };
+
+                    var origns = Configuration[string.Join(":", sec)].Split(',');
+                    p.WithOrigins(origns)
+                     .AllowAnyHeader()//Ensures that the policy allows any header.
+                     .AllowAnyMethod();
+                });
+            });
+            #endregion
+            //Microsoft.AspNetCore.Mvc.NewtonsoftJson
+            //  Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson
+            services.AddControllers()
+                .AddJsonOptions(o =>
+                {
+                    o.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
+               //.AddNewtonsoftJson(options =>
+               //{
+               //    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+               //    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;  // 设置时区为 UTC)
+               //       options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+               //});
 
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,6 +76,7 @@ namespace DataCrawler.API
         
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowedRequest");
             app.UseRouting();
 
             app.UseAuthorization();

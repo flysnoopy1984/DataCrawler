@@ -1,4 +1,5 @@
-﻿using DataCrawler.Model.BaseEnums;
+﻿using ContentCenter.Model.BaseEnum;
+using DataCrawler.Model.BaseEnums;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,12 @@ namespace DataCrawler.Model
 
         public DateTime UpdateDateTime { get; set; }
 
-        [SugarColumn(Length = 50,IsNullable =true)]
-        public string UpdatedBy { get; set; }
+        //[SugarColumn(Length = 50,IsNullable =true)]
+        //public string UpdatedBy { get; set; }
 
         public DataSource DataSource { get; set; }
 
+        [SugarColumn(IsNullable = true)]
         /// <summary>
         /// 是否被（物理）删除
         /// </summary>

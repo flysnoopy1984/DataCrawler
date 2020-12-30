@@ -1,12 +1,15 @@
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Core.deps.json
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Core.dll
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Core.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\ContentCenter.Model.dll
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Model.dll
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Repository.dll
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Util.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\IQB.Util.dll
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Model.pdb
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Repository.pdb
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\DataCrawler.Util.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Core\bin\Debug\netcoreapp3.1\IQB.Util.pdb
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\obj\Debug\netcoreapp3.1\DataCrawler.Core.csprojAssemblyReference.cache
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\obj\Debug\netcoreapp3.1\DataCrawler.Core.csproj.CoreCompileInputs.cache
 D:\Project\SourceCode\DataCrawler\DataCrawler.Core\obj\Debug\netcoreapp3.1\DataCrawler.Core.AssemblyInfoInputs.cache

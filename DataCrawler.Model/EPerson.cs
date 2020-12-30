@@ -1,4 +1,6 @@
-﻿using DataCrawler.Model.BaseEnums;
+﻿using ContentCenter.Model;
+using ContentCenter.Model.BaseEnum;
+using DataCrawler.Model.BaseEnums;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Text;
 namespace DataCrawler.Model
 {
     [SugarTable("PersonInfo")]
-    public class EPerson: BaseMasterData
+    public class EPerson: BaseMasterTable
     {
         [SugarColumn(IsIdentity = true)]
         public int Id { get; set; }
@@ -39,7 +41,11 @@ namespace DataCrawler.Model
         [SugarColumn(Length = 255,IsNullable = true)]
         public string SourceUrl { get; set; }
 
-       
+        [SugarColumn(IsNullable = true)]
+        public DataSource DataSource { get; set; }
+
+
+
 
     }
 }

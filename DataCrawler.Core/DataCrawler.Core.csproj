@@ -14,4 +14,10 @@
     <ProjectReference Include="..\DataCrawler.Util\DataCrawler.Util.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ContentCenter.Model">
+      <HintPath>..\RefDll\ContentCenter.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

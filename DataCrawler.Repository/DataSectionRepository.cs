@@ -24,9 +24,15 @@ namespace DataCrawler.Repository
             {
                 foreach(var es in newList)
                 {
-                    int n = base.DelAll(a => a.SectionCode == es.SectionCode && a.ItemCode == es.ItemCode && a.CreateDateTime.AddDays(10) < DateTime.Today);
-                    if (n  > 0)
-                        base.Add(es);
+                    int n = base.IsExist(a => new CountResult { Count = SqlFunc.AggregateCount(a.Id) }, a => a.SectionCode == es.SectionCode && a.ItemCode == es.ItemCode);
+                    if(n == 0) base.Add(es);
+                    else
+                    {
+                        int r = base.DelAll(a => a.SectionCode == es.SectionCode && a.ItemCode == es.ItemCode && a.CreateDateTime.AddDays(30) < DateTime.Today);
+                        if (r > 0)
+                            base.Add(es);
+                    }
+                  
                 }
             //    base.AddRange(newList);
 

@@ -1,4 +1,6 @@
 ﻿using DataCrawler.Model;
+using DataCrawler.Model.Book.Search;
+using DataCrawler.Model.CaiPiao;
 using DataCrawler.Repository;
 using SqlSugar;
 using System;
@@ -17,25 +19,15 @@ namespace DataCrawler.Framework
         }
         public static void InitTables(ISqlSugarClient db)
         {
-            db.DbMaintenance.CreateDatabase(databaseName: "MasterCrawlerData");
-            List<Type> tbList = new List<Type>()
-                    {
-                        typeof(EBookInfo),
-                        typeof(EBookSeries),
-                        typeof(EBookTag),
-                        typeof(ESeriesInfo),
-                        typeof(ESectionTag),
 
-                        typeof(EDataSection),
-                        typeof(EPerson),
-                        typeof(ESection),
-                        typeof(ETag),
-                       
 
-                        typeof(EPlan_FromDouBanTagUrls),
-                       
-                    };
-            db.CodeFirst.InitTables(tbList.ToArray());
+            //List<Type> tbList = new List<Type>()
+            //        {
+         
+            //           typeof(cpDaLeTouData),
+            //           typeof(ESearchOneBookResult)
+            //        };
+            //db.CodeFirst.InitTables(tbList.ToArray());
         
         }
     }

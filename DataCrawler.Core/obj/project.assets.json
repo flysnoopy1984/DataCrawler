@@ -1557,6 +1557,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "IQB.Util": "1.0.0",
           "sqlSugarCore": "5.0.0.11"
         },
         "compile": {
@@ -1602,6 +1603,20 @@
         },
         "runtime": {
           "bin/placeholder/DataCrawler.Util.dll": {}
+        }
+      },
+      "IQB.Util/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "NLog": "4.7.0",
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "bin/placeholder/IQB.Util.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/IQB.Util.dll": {}
         }
       }
     }
@@ -5239,6 +5254,11 @@
       "type": "project",
       "path": "../DataCrawler.Util/DataCrawler.Util.csproj",
       "msbuildProject": "../DataCrawler.Util/DataCrawler.Util.csproj"
+    },
+    "IQB.Util/1.0.0": {
+      "type": "project",
+      "path": "../../IQBLib/IQB.Util/IQB.Util.csproj",
+      "msbuildProject": "../../IQBLib/IQB.Util/IQB.Util.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -1,4 +1,5 @@
-﻿using DataCrawler.Model;
+﻿using ContentCenter.Model;
+using DataCrawler.Model;
 using DataCrawler.Model.MiddleObject;
 using DataCrawler.Repository.Core;
 using DataCrawler.Util;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace DataCrawler.Core.DouBan
 {
@@ -31,10 +33,7 @@ namespace DataCrawler.Core.DouBan
 
         private void InitData(string entryUrl)
         {
-            //if (string.IsNullOrEmpty(_entryUrl))
-            //{
-
-            //}
+  
 
             _entryUrl = entryUrl;
             int sp = _entryUrl.IndexOf("subject") + "subject/".Length;
@@ -74,7 +73,10 @@ namespace DataCrawler.Core.DouBan
                // throw new Exception("No Book Title");
             bi.Title = bn.InnerText;
             var node = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='mainpic']/a");
-            bi.CoverUrl = node.Attributes["href"].Value;
+            bi.CoverUrl_Big = node.Attributes["href"].Value; //大图片
+
+            node = node.SelectSingleNode("//img");
+            bi.CoverUrl = node.Attributes["src"].Value; //小图片
 
             var info = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='info']");
             var infoAttrs = info.SelectNodes(".//span");
@@ -187,6 +189,12 @@ namespace DataCrawler.Core.DouBan
                         var ep = authorName.IndexOf("]");
                         author.Country= authorName.Substring(1, ep-1);
                         author.Name = authorName.Substring(ep+1);
+                    }
+                    if (authorName.StartsWith("<"))
+                    {
+                        var ep = authorName.IndexOf(">");
+                        author.Country = authorName.Substring(1, ep - 1);
+                        author.Name = authorName.Substring(ep + 1);
                     }
                     else if (authorName.StartsWith("("))
                     {
@@ -320,6 +328,7 @@ namespace DataCrawler.Core.DouBan
         /// <param name="doc"></param>
         public void AnalyTags(HtmlDocument doc)
         {
+            int num = 3;
             var tagData = _bookDetailData.tagList;
             var tagNodes = doc.DocumentNode.SelectNodes("//div[@id='db-tags-section']/div[@class='indent']/span");
             if(tagNodes !=null && tagNodes.Count >0)
@@ -329,16 +338,11 @@ namespace DataCrawler.Core.DouBan
                     var tag = tn.SelectSingleNode(".//a").InnerText.Trim();
                     if (tag.Length > CrawlerSetting.Tag_LimitLenght && CrawlerSetting.Tag_IgnoreLongString) continue;
                     tagData.Add(newTag(tag));
-                    //tagData.Add(new ETag
-                    //{
-                    //    TagCode = tag.ToPinYin().ToLowerInvariant(),
-                    //    TagName = tag,
-                    //    TagType = Model.BaseEnums.TagType.Book,
-                    //    TagUrl = $"/tag/{tag}",
-                    //}) ;
+                    num--;
+                    if (num < 0) break;
                 }
             }
-         //   _bookDetailData.DouBanBookInfo.Score = Convert.ToDouble(score);
+        
         }
 
        

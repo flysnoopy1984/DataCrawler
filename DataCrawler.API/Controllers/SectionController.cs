@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataCrawler.Model;
 using DataCrawler.Repository;
+using IQB.Util.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

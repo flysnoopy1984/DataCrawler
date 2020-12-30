@@ -5,17 +5,19 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.API", "DataCrawler.API\DataCrawler.API.csproj", "{FC9F9AE2-38CE-43EC-B1BB-A6901937B680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCrawler.Model", "DataCrawler.Model\DataCrawler.Model.csproj", "{A794FBA5-90C0-4538-8485-3B83B8371CE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.Model", "DataCrawler.Model\DataCrawler.Model.csproj", "{A794FBA5-90C0-4538-8485-3B83B8371CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCrawler.Core", "DataCrawler.Core\DataCrawler.Core.csproj", "{D5993BB1-8B2C-4F0B-96D0-AE152948C2C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.Core", "DataCrawler.Core\DataCrawler.Core.csproj", "{D5993BB1-8B2C-4F0B-96D0-AE152948C2C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCrawler.Repository", "DataCrawler.Repository\DataCrawler.Repository.csproj", "{08F287A1-42C6-4CA8-98D1-F0DA3579CFA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.Repository", "DataCrawler.Repository\DataCrawler.Repository.csproj", "{08F287A1-42C6-4CA8-98D1-F0DA3579CFA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCrawler.Framework", "DataCrawler.Framework\DataCrawler.Framework.csproj", "{7942A351-59C0-4AA6-B7C0-729548FF37C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.Framework", "DataCrawler.Framework\DataCrawler.Framework.csproj", "{7942A351-59C0-4AA6-B7C0-729548FF37C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCrawler.Tasks", "DataCrawler.Tasks\DataCrawler.Tasks.csproj", "{DFC93821-7409-456C-A6B6-90875671CBED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.Tasks", "DataCrawler.Tasks\DataCrawler.Tasks.csproj", "{DFC93821-7409-456C-A6B6-90875671CBED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCrawler.Util", "DataCrawler.Util\DataCrawler.Util.csproj", "{7244A823-89DC-4786-8D6A-43A0009FD09A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCrawler.Util", "DataCrawler.Util\DataCrawler.Util.csproj", "{7244A823-89DC-4786-8D6A-43A0009FD09A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQB.Util", "..\IQBLib\IQB.Util\IQB.Util.csproj", "{B420F99D-3E67-480C-8CD0-581DF3128833}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{7244A823-89DC-4786-8D6A-43A0009FD09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7244A823-89DC-4786-8D6A-43A0009FD09A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7244A823-89DC-4786-8D6A-43A0009FD09A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B420F99D-3E67-480C-8CD0-581DF3128833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B420F99D-3E67-480C-8CD0-581DF3128833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B420F99D-3E67-480C-8CD0-581DF3128833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B420F99D-3E67-480C-8CD0-581DF3128833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

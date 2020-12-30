@@ -1,4 +1,5 @@
-﻿using DataCrawler.Model;
+﻿using ContentCenter.Model.BaseEnum;
+using DataCrawler.Model;
 using DataCrawler.Model.MiddleObject;
 using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
@@ -59,7 +60,7 @@ namespace DataCrawler.Core.DouBan
                 result.Add(new BookBatch()
                 {
                     DetailUrl = url,
-                    FictionType = Model.BaseEnums.FictionType.Fiction,
+                    FictionType = FictionType.Fiction,
                     SectionCode = "NewExpress",
                     
                 }) ;
@@ -73,7 +74,7 @@ namespace DataCrawler.Core.DouBan
                 result.Add(new BookBatch()
                 {
                     DetailUrl = url,
-                    FictionType = Model.BaseEnums.FictionType.Aside,
+                    FictionType = FictionType.Aside,
                     SectionCode = "NewExpress",
 
                 });

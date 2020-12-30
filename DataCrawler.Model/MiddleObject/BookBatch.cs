@@ -1,4 +1,5 @@
-﻿using DataCrawler.Model.BaseEnums;
+﻿using ContentCenter.Model.BaseEnum;
+using DataCrawler.Model.BaseEnums;
 using System;
 using System.Collections.Generic;
 using System.Text;

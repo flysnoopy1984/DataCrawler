@@ -1,9 +1,13 @@
-﻿using DataCrawler.Core;
+﻿using ContentCenter.Model;
+using DataCrawler.Core;
+using DataCrawler.Core.Other;
 using DataCrawler.Framework;
 using DataCrawler.Framework.SetupServices;
 using DataCrawler.Model;
+using DataCrawler.Model.BaseEnums;
 using DataCrawler.Repository;
 using DataCrawler.Tasks.DouBan;
+using DataCrawler.Tasks.Other;
 using DataCrawler.Util;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,21 +35,18 @@ namespace DataCrawler.Tasks
         private static ICrawlerBatchBook _TagList;
         private static ICrawlerBook _DetailBook;
         private static ICrawlerTag _CrawlerTag;
+        private static DaReTouCrawler _DaReTouCrawler;
         private static SqlSugarClient _Db;
+        public static string _CurrentDirectory;
         static void Main(string[] args)
         {
             Init();
-
-
-
-           //  RunSingle();
-          RunLatestTask();
-
-
-        //     test();
-        //   RunPlan();
-            //  Console.WriteLine("Done");
-         //   TestProxy();
+            //  RunSingle();
+               RunLatestTask();
+            //   HandleSome();
+            //   RunPlan();
+            //     RunOtherTask();
+         //   test();
             Console.ReadLine();
         }
 
@@ -120,6 +121,46 @@ namespace DataCrawler.Tasks
         
         } 
 
+        private static void RunOtherTask()
+        {
+
+            DaReTouTask task = new DaReTouTask(_DaReTouCrawler);
+            string filePath = @"D:\Project\SourceCode\DataCrawler\DataCrawler.Tasks\htmlFile\daretou.txt";
+            task.runHtml(filePath);
+
+
+        }
+        private static void HandleSome()
+        {
+            var bookTagDb = _ServiceProvider.GetService<BookTagRepository>();
+            var list = bookTagDb.Db.Queryable<EBookTag>()
+                .GroupBy(b => b.BookCode)
+                .Having(b => SqlFunc.AggregateCount(b.BookCode) > 4)
+                .Select(b => new { c = SqlFunc.AggregateCount(b.BookCode),b.BookCode }).ToList();
+            int i = 0;
+            foreach(var bt in list)
+            {
+               
+                var delList = bookTagDb.Db.Queryable<EBookTag>()
+                    .Take(bt.c - 4)
+                    .Where(b => b.BookCode == bt.BookCode)
+                    .OrderBy(b => b.Id, OrderByType.Desc).ToList();
+                var pks = new List<int>();
+                foreach (var del in delList)
+                {
+                    pks.Add(del.Id);
+                    Console.WriteLine($"{bt.BookCode}-{del.TagCode}");
+                }
+                bookTagDb.Db.Deleteable<EBookTag>().In(pks.ToArray()).ExecuteCommand();
+
+                //i++;
+                //if (i > 20)
+                //    break;
+
+            }
+           
+
+        }
         private static void TestProxy()
         {
             string url = "http://webapi.http.zhimacangku.com/getip?num=1&type=1&pro=&city=0&yys=0&port=1&pack=92851&ts=0&ys=0&cs=0&lb=1&sb=0&pb=4&mr=1&regions=";
@@ -159,8 +200,16 @@ namespace DataCrawler.Tasks
         }
         private  static void test()
         {
-            ProxyManager.AddFeiZhuHost();
+            string onClickString = "moreurl(this,{i: '0', query: '%E9%87%91%E5%9C%A3%E5%8F%B9%E8%AF%BB%E6%89%B9%E3%80%8A%E6%B0%B4%E6%B5%92%E4%BC%A0%E3%80%8B-%E9%87%91%E5%9C%A3%E5%8F%B9', from: 'dou_search_book', sid: 1854151, qcat: ''})";
 
+            int sPos = onClickString.IndexOf("sid");
+            int ePos = onClickString.IndexOf(", ", sPos + 1);
+            string eStr = onClickString.Substring(ePos);
+            var eStrLen = eStr.Length;
+            //onClickString
+            string r = onClickString.Substring(sPos + 5, onClickString.Length - eStrLen - sPos - 5);
+            Console.WriteLine(r);
+            Console.ReadLine();
             //try
             //{
             //    throw new ExceptionProxyConnect("aaa");
@@ -223,9 +272,9 @@ namespace DataCrawler.Tasks
             try
             {
                 dynamic type = (new Program()).GetType();
-                string currentDirectory = Path.GetDirectoryName(type.Assembly.Location);
+                _CurrentDirectory = Path.GetDirectoryName(type.Assembly.Location);
 
-                _configuration = Configuration.SetBasePath(currentDirectory)
+                _configuration = Configuration.SetBasePath(_CurrentDirectory)
                       .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                       .Build();
 
@@ -238,7 +287,7 @@ namespace DataCrawler.Tasks
               //  serviceCollection.AddScoped<IConfiguration>(_configuration);
                    //   
 
-                   _ServiceProvider = serviceCollection.BuildServiceProvider();
+                _ServiceProvider = serviceCollection.BuildServiceProvider();
                 _DouBanBookRepository = _ServiceProvider.GetService<DouBanBookService>();
                 _Db = _ServiceProvider.GetService<SqlSugarClient>();
 
@@ -247,15 +296,13 @@ namespace DataCrawler.Tasks
                 _TagList = list.FirstOrDefault(a => a.GetType().Name == "TagListCrawler");
                 _DetailBook = _ServiceProvider.GetService<ICrawlerBook>();
                 _CrawlerTag = _ServiceProvider.GetService<ICrawlerTag>();
+                _DaReTouCrawler = _ServiceProvider.GetService<DaReTouCrawler>();
             }
             catch(Exception ex)
             {
                 NLogUtil.ErrorTxt($"Init Error:{ex.Message}",true);
             }
          
-            
-
-
         }
 
         private static void Init()
@@ -264,9 +311,9 @@ namespace DataCrawler.Tasks
             {
                 Console.WriteLine("Init");
                 InitSystem();
-                DbSeed.InitTables(_Db);
-                var needInitSection = Convert.ToBoolean(_configuration["InitTask:NeedInitSection"]);
-                DbSeed.InitData(_DouBanBookRepository, needInitSection);
+                //DbSeed.InitTables(_Db);
+                //var needInitSection = Convert.ToBoolean(_configuration["InitTask:NeedInitSection"]);
+                //DbSeed.InitData(_DouBanBookRepository, needInitSection);
             }
             catch (Exception ex)
             {

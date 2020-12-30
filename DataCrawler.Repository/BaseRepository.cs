@@ -1,6 +1,8 @@
 ﻿
+using ContentCenter.Model;
 using DataCrawler.Model;
 using DataCrawler.Util;
+using IQB.Util.Models;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -171,20 +173,20 @@ namespace DataCrawler.Repository
             return list;
         }
 
-        public  M AddOrUpdate_MasterData<M>(M saveObj) where M : BaseMasterData, new()
+        public  M AddOrUpdate_MasterData<M>(M saveObj) where M : BaseMasterTable, new()
         {
             return _db.Saveable<M>(saveObj)
-             .UpdateIgnoreColumns(o => new { o.CreateDateTime, o.DataSource })
+             .UpdateIgnoreColumns(o => new { o.CreateDateTime })
              .ExecuteReturnEntity();
 
         }
-        public List<M> AddOrUpdate_MasterData<M>(List<M> saveList) where M : BaseMasterData, new()
+        public List<M> AddOrUpdate_MasterData<M>(List<M> saveList) where M : BaseMasterTable, new()
         {
             if (saveList == null || saveList.Count == 0)
                 return saveList;
 
             return _db.Saveable<M>(saveList)
-                .UpdateIgnoreColumns(o => new { o.CreateDateTime, o.DataSource })
+                .UpdateIgnoreColumns(o => new { o.CreateDateTime,})
                 .ExecuteReturnList();
         }
 

@@ -16,7 +16,7 @@ namespace DataCrawler.Model
         [SugarColumn(Length = 50, ColumnDataType = "nvarchar")]
         public string ItemCode { get; set; }
 
-        [SugarColumn(Length = 40)]
+        [SugarColumn(Length = 40,IsNullable =true)]
         public string BatchNo { get; set; }
 
         public DateTime CreateDateTime { get; set; }

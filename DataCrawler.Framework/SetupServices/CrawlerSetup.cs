@@ -1,5 +1,6 @@
 ﻿using DataCrawler.Core;
 using DataCrawler.Core.DouBan;
+using DataCrawler.Core.Other;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,26 +15,14 @@ namespace DataCrawler.Framework.SetupServices
         public static void AddCrawlers(this IServiceCollection services, IConfiguration configuration)
         {
             //    var type = System.Reflection.Assembly
-            services.AddTransient<ICrawlerBatchBook,BookLatestCrawler>();
-            services.AddTransient<ICrawlerBatchBook,BookPopularCrawler>();
-            services.AddTransient<ICrawlerBook, BookDetailCrawler>();
-            services.AddTransient<ICrawlerTag, BookTagsCrawler>();
-            services.AddTransient<ICrawlerBatchBook, TagListCrawler>();
-            //services.AddTransient(fac =>
-            //{
-            //    Func<string, ICrawlerData> accesor = key =>
-            //    {
-            //        switch(key)
-            //        {
-
-            //        }
-            //        return fac.GetService<DouBanBook_Latest>();
-            //    };
-
-            //    return accesor;
-            //});
-
-            //  services.AddSingleton(a=>a.GetService())
+            services.AddScoped<ICrawlerBatchBook,BookLatestCrawler>();
+            services.AddScoped<ICrawlerBatchBook,BookPopularCrawler>();
+            services.AddScoped<ICrawlerBook, BookDetailCrawler>();
+            services.AddScoped<ICrawlerTag, BookTagsCrawler>();
+            services.AddScoped<ICrawlerBatchBook, TagListCrawler>();
+            services.AddScoped<ICrawlerSearchBook, BookSearchCrawler>();
+            services.AddScoped<DaReTouCrawler>();
+         
         }
     }
 }

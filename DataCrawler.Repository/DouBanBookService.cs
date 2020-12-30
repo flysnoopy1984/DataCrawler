@@ -1,7 +1,10 @@
-﻿using DataCrawler.Model;
+﻿using ContentCenter.Model;
+using DataCrawler.Model;
+using DataCrawler.Model.Book.Search;
 using DataCrawler.Model.MiddleObject;
 using DataCrawler.Repository.Core;
 using DataCrawler.Util;
+using IQB.Util.Models;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -47,9 +50,9 @@ namespace DataCrawler.Repository
                 throw new Exception(msg + "没有BookCode");
             if (string.IsNullOrEmpty(middle.DouBanBookInfo.AuthorCode))
                 throw new Exception(msg + "没有作者Code");
-
-
         }
+
+       
 
 
         /// <summary>
@@ -67,6 +70,7 @@ namespace DataCrawler.Repository
                     var rAll = await _Db.Ado.UseTranAsync(() => {
                     try
                     {
+                            //书本作者
                         var ePerson = _PersonDb.AddOrUpdate_MasterData<EPerson>(middle.Author);
                     }
                     catch (Exception ex)
@@ -75,10 +79,11 @@ namespace DataCrawler.Repository
                     }
 
 
-
-                    var rSection = _SectionDb.AddOrUpdate_MasterData<ESection>(middle.SectionList);
+                        //Section
+                 //   var rSection = _SectionDb.AddOrUpdate_MasterData<ESection>(middle.SectionList);
                     try
                     {
+                            //书本信息
                         var rBook = _BookDb.AddOrUpdate_MasterData<EBookInfo>(middle.DouBanBookInfo);
                     }
                     catch (Exception ex)
@@ -90,6 +95,7 @@ namespace DataCrawler.Repository
 
                      try
                     {
+                            //书本Tag
                         var rTag = _TagDb.AddOrUpdate_MasterData<ETag>(middle.tagList);
                     }
                     catch(Exception ex)
@@ -98,7 +104,8 @@ namespace DataCrawler.Repository
                     }
                   
 
-                    HandleDataSection(middle.GetDataSections());
+                //    HandleDataSection(middle.GetDataSections());
+                //书本和Tag关系
                     HandleBookTag(middle.GetBookTags());
 
                 });
@@ -117,31 +124,13 @@ namespace DataCrawler.Repository
                 return false;
             }
 
-            return true;
+          //  return true;
        
            
         }
 
        
-        public void HandleDataSection(List<EDataSection> list)
-        {
-            List<EDataSection> newList = new List<EDataSection>();
-            foreach (var es in list)
-            {
-                var c = _DataSectionDb.Db.Queryable<EDataSection>()
-                     .Where(a => a.ItemCode == es.ItemCode && a.SectionCode == es.SectionCode)
-                     .Select(s => new { ct = SqlFunc.AggregateCount(s.Id) }).First();
-                if (c.ct == 0)
-                {
-                    newList.Add(es);
-                  
-                    // _DataSectionDb.Db.Insertable<EDataSection>(es).ExecuteCommand();
-                }
-               // _DataSectionDb.sa
-
-            }
-            _DataSectionDb.AddRange(newList);
-        }
+      
 
         public void HandleBookTag(List<EBookTag> list)
         {
@@ -150,7 +139,8 @@ namespace DataCrawler.Repository
             {
                 foreach (var tag in list)
                 {
-                    var c = _BookTagDb.IsExist(s => new CountResult { Count = SqlFunc.AggregateCount(s.Id) },
+                    var c = _BookTagDb.IsExist(
+                        s => new CountResult { Count = SqlFunc.AggregateCount(s.Id) },
                     a => a.BookCode == tag.BookCode && a.TagCode == tag.TagCode);
 
                     //var c = _BookTagDb.IsExist(s => new { ct = SqlFunc.AggregateCount(s.Id) },
@@ -246,17 +236,35 @@ namespace DataCrawler.Repository
         }
         #endregion
 
-        public  void Test(BookDetail_middle middle)
-        {
-            var rBook = _BookDb.AddOrUpdate_MasterData<EBookInfo>(middle.DouBanBookInfo);
-        }
-
-
+   
         public async void InitData(bool needsection = false)
         {
             if(needsection)
                 await _SectionDb.Init();
         }
+
+        #region Search
+        public ModelPager<ESearchOneBookResult> SearchBook(QueryBookSearch query)
+        {
+            if (string.IsNullOrEmpty(query.keyword))
+                throw new Exception("没有关键字");
+          
+            ModelPager<ESearchOneBookResult> result = new ModelPager<ESearchOneBookResult>(query.pageIndex, query.pageSize);
+            var mainSql = _Db.Queryable<ESearchOneBookResult>()
+                                           .Where(r => r.keyWord == query.keyword);
+
+            result.datas = mainSql.ToPageList(query.pageIndex, query.pageSize);
+            return result;
+         
+        }
+        public void SaveSearchResult(List<ESearchOneBookResult> saveDatas)
+        {
+            _Db.Insertable(saveDatas).ExecuteCommand();
+        }
+        
+        #endregion
+
+
 
     }
 }

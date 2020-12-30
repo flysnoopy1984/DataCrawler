@@ -1,0 +1,17 @@
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Repository.deps.json
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Repository.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Repository.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Model.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Util.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\IQB.Util.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Model.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\DataCrawler.Util.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\IQB.Util.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.csprojAssemblyReference.cache
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.csproj.CoreCompileInputs.cache
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.AssemblyInfoInputs.cache
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.AssemblyInfo.cs
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.csproj.CopyComplete
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.dll
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\obj\Release\netcoreapp3.1\DataCrawler.Repository.pdb
+D:\Project\SourceCode\DataCrawler\DataCrawler.Repository\bin\Release\netcoreapp3.1\ContentCenter.Model.dll

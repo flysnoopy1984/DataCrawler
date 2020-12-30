@@ -5,7 +5,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Book\EBookInfo.cs" />
+    <Compile Remove="Book\EBookSeries.cs" />
+    <Compile Remove="Book\EBookTag.cs" />
+    <Compile Remove="Book\ESectionTag.cs" />
+    <Compile Remove="Book\ESeriesInfo.cs" />
+    <Compile Remove="ESection.cs" />
+    <Compile Remove="ETag.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="sqlSugarCore" Version="5.0.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\IQBLib\IQB.Util\IQB.Util.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ContentCenter.Model">
+      <HintPath>..\RefDll\ContentCenter.Model.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

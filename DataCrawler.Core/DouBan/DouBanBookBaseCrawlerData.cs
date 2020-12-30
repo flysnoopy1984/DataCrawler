@@ -1,4 +1,6 @@
-﻿using DataCrawler.Model;
+﻿using ContentCenter.Model;
+using ContentCenter.Model.BaseEnum;
+using DataCrawler.Model;
 using DataCrawler.Model.MiddleObject;
 using DataCrawler.Util;
 using HtmlAgilityPack;
@@ -23,7 +25,7 @@ namespace DataCrawler.Core.DouBan
         public BookDetail_middle NewDetailMiddle()
         {
             var result =  new BookDetail_middle();
-            result.DouBanBookInfo.DataSource = Model.BaseEnums.DataSource.DouBan;
+            result.DouBanBookInfo.DataSource = DataSource.DouBan;
             return result;
         }
 
@@ -33,7 +35,7 @@ namespace DataCrawler.Core.DouBan
             {
                 Code = Code.ToPinYin().ToLowerInvariant(),
                 Name = Code,
-                Type = Model.BaseEnums.TagType.Book,
+                Type = TagType.book,
                 Url = $"/tag/{Code}",
             };
         }

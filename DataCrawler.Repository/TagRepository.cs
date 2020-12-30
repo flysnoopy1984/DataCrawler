@@ -1,4 +1,5 @@
-﻿using DataCrawler.Model;
+﻿using ContentCenter.Model;
+using DataCrawler.Model;
 using SqlSugar;
 using System;
 using System.Collections.Generic;

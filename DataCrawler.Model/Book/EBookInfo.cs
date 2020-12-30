@@ -6,34 +6,37 @@ using System;
 namespace DataCrawler.Model
 {
     [SugarTable("BookInfo")]
-    public class EBookInfo: BaseMasterData
+    public class EBookInfo : BaseMasterData
     {
 
-     
-        [SugarColumn(IsIdentity = true)]
-        public int Id { get; set; }
+
+        //[SugarColumn(IsIdentity = true)]
+        //public int Id { get; set; }
 
         /// <summary>
         /// 书Code:抓爬的：抓爬网站编号+抓爬网站BookId
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true, Length = 50,ColumnDataType = "nvarchar")]
+        [SugarColumn(IsPrimaryKey = true, Length = 50, ColumnDataType = "nvarchar")]
         public string Code { get; set; }
 
         /// <summary>
         /// 抓爬网站BookId
         /// </summary>
-        [SugarColumn(Length =20,IsNullable = true)]
+        [SugarColumn(Length = 20, IsNullable = true)]
         public string SourceBookId { get; set; }
 
 
-        [SugarColumn( Length = 50,ColumnDataType = "nvarchar")]
+        [SugarColumn(Length = 50, ColumnDataType = "nvarchar")]
         public string AuthorCode { get; set; }
 
-       
 
 
-        [SugarColumn(Length = 255,IsNullable = true)]
+
+        [SugarColumn(Length = 255, IsNullable = true)]
         public string CoverUrl { get; set; }
+
+        [SugarColumn(Length = 255, IsNullable = true)]
+        public string CoverUrl_Big { get; set; }
 
         /// <summary>
         /// 书名
@@ -54,7 +57,7 @@ namespace DataCrawler.Model
         [SugarColumn(Length = 200, IsNullable = true, ColumnDataType = "nvarchar")]
         public string SubTitle { get; set; }
 
-       
+
 
         /// <summary>
         /// 译者
@@ -109,7 +112,7 @@ namespace DataCrawler.Model
         /// <summary>
         /// 简介
         /// </summary>
-       [SugarColumn(ColumnDataType = "text", IsNullable = true)]
+        [SugarColumn(ColumnDataType = "text", IsNullable = true)]
         public string Summery { get; set; }
 
         /// <summary>
@@ -140,7 +143,7 @@ namespace DataCrawler.Model
         public FictionType FictionType { get; set; }
 
         public Double Score { get; set; }
-        
+
 
 
 

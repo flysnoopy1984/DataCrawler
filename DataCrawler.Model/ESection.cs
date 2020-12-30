@@ -15,7 +15,7 @@ namespace DataCrawler.Model
         /// <summary>
         /// Code 
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true, Length = 50,ColumnDataType = "nvarchar")]
+        [SugarColumn(IsPrimaryKey = true, Length = 50, ColumnDataType = "nvarchar")]
         public string Code { get; set; }
 
         /// <summary>
@@ -25,10 +25,17 @@ namespace DataCrawler.Model
         public string Title { get; set; }
 
 
+
+
         /// <summary>
-        /// 书，Tag 都有栏目
-        /// </summary>
-        [SugarColumn(DefaultValue ="0")]
+        /// 栏目分网站主栏目，分栏目
+        /// </summary>   
         public SectionType SectionType { get; set; }
+
+        /// <summary>
+        /// 界面排序
+        /// </summary>
+        [SugarColumn(DefaultValue = "0", IsNullable = true)]
+        public int seq { get; set; }
     }
 }
